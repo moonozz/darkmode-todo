@@ -46,6 +46,17 @@ function App() {
     setData([newItem, ...data]);
   };
 
+  const onDelete = (targetId) => {
+    const newTodoList = data.filter((e) => e.id !== targetId);
+    setData(newTodoList);
+  };
+
+  const onEdit = (targetId, newTodo) => {
+    setData(
+      data.map((e) => (e.id === targetId ? { ...e, content: newTodo } : e))
+    );
+  };
+
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -53,7 +64,12 @@ function App() {
         <Container>
           <Nav toggleTheme={toggleTheme} themeMode={themeMode} />
           {/* <Main onCreate={onCreate} todoList={data} dummyData={dummyData} /> */}
-          <Main onCreate={onCreate} todoList={data} />
+          <Main
+            onCreate={onCreate}
+            todoList={data}
+            onDelete={onDelete}
+            onEdit={onEdit}
+          />
         </Container>
         {/* <Toggle /> */}
       </ThemeProvider>

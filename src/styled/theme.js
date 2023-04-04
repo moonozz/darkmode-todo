@@ -6,6 +6,7 @@ export const light = {
     bgColor: "#F6F6F6",
     icBtnBgColor: "#fff",
     icBtnBgHoverColor: "#F6F6F6",
+    // icBtnComplete: '#00C39A',
     txtBtnBgColor: "#fff",
     txtBtnBgHoverColor: "#F6F6F6",
     navColor: "#fff",

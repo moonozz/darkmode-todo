@@ -49,7 +49,7 @@ const TodoFilter = styled.div`
   /* padding: 0.5rem; */
 `;
 
-function Main({ todoList, onCreate }) {
+function Main({ todoList, onCreate, onDelete, onEdit }) {
   return (
     <MainBody>
       <MainContainer>
@@ -60,7 +60,7 @@ function Main({ todoList, onCreate }) {
         </TodoTitle>
         <TodoFilter>
           {todoList.map((e) => (
-            <TodoItem key={e.id} {...e} />
+            <TodoItem key={e.id} {...e} onDelete={onDelete} onEdit={onEdit} />
           ))}
         </TodoFilter>
       </MainContainer>

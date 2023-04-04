@@ -2,12 +2,19 @@
 import styled from "styled-components";
 
 export const IcBtn = styled.button`
+  margin-left: 0.25rem;
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 0.75rem;
   background-color: ${(props) => props.theme.color.contentBgColor};
   &:hover {
     background-color: ${(props) => props.theme.color.icBtnBgHoverColor};
+  }
+  &.complete {
+    background-color: #00c39a;
+    &:hover {
+      background-color: #06ad8a;
+    }
   }
 `;
 
