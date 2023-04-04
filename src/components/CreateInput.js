@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
 // import { TextBtn } from "./Btn";
 
@@ -37,22 +36,41 @@ const SubmitBtn = styled.button`
   }
 `;
 
-function CreateInput() {
+function CreateInput({ onCreate }) {
+  const contentInput = useRef();
+
   const [text, setText] = useState("");
+  const [complete, setComplete] = useState(false);
 
   const onChange = (e) => {
     setText(e.target.value);
+  };
+
+  const handleSubmit = () => {
+    console.log(text);
+    if (text.length > 30 || text.length === 0) {
+      contentInput.current.focus();
+      return;
+    }
+    // console.log(text);
+    // console.log(complete);
+    // input 등록하기(App에서 만든 함수 props로 전달받음
+    onCreate(text, complete);
+    // input 등록하고 내용 초기화해주기
+    setText("");
   };
 
   return (
     <>
       <CreateInputBody>
         <InputField
+          ref={contentInput}
+          name="content"
           placeholder="오늘의 할 일을 입력해주세요."
           onChange={onChange}
           value={text}
         />
-        <SubmitBtn>등록하기</SubmitBtn>
+        <SubmitBtn onClick={handleSubmit}>등록하기</SubmitBtn>
       </CreateInputBody>
     </>
   );

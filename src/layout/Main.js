@@ -1,10 +1,10 @@
 import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
-import Task from "../components/Task";
+import TodoItem from "../components/TodoItem";
 import CreateInput from "../components/CreateInput";
 
-const MainBody = styled.div`
+const MainBody = styled.section`
   // Nav 스크롤 고정해서 생긴 padding-left
   padding-left: 21rem;
 
@@ -18,7 +18,7 @@ const MainContainer = styled.div`
   width: 70.5rem;
 `;
 
-const TaskTitle = styled.div`
+const TodoTitle = styled.div`
   /* width: 100%; */
   /* position: fixed; */
   /* background-color: ${(props) => props.theme.color.bgColor}; */
@@ -31,7 +31,7 @@ const FilterTxt = styled.p`
   font-weight: 700;
 `;
 
-const TaskLengthTag = styled.div`
+const TodoLengthTag = styled.div`
   margin-left: 0.5rem;
   background-color: ${(props) => props.theme.color.taskLengthTagBg};
   color: #00c39a;
@@ -40,24 +40,29 @@ const TaskLengthTag = styled.div`
   font-weight: 700;
 `;
 
-const TaskFilter = styled.div`
+const TodoFilter = styled.div`
+  /* display: flex; */
   /* height: 100; */
   /* background-color: red; */
+  /* display: grid; */
+  /* grid-template-columns: 1fr 1fr 1fr; */
   /* padding: 0.5rem; */
 `;
 
-function Main() {
+function Main({ todoList, onCreate }) {
   return (
     <MainBody>
       <MainContainer>
-        <CreateInput />
-        <TaskTitle>
+        <CreateInput onCreate={onCreate} />
+        <TodoTitle>
           <FilterTxt>할 일 전체보기</FilterTxt>
-          <TaskLengthTag>11</TaskLengthTag>
-        </TaskTitle>
-        <TaskFilter>
-          <Task />
-        </TaskFilter>
+          <TodoLengthTag>{todoList.length}</TodoLengthTag>
+        </TodoTitle>
+        <TodoFilter>
+          {todoList.map((e) => (
+            <TodoItem key={e.id} {...e} />
+          ))}
+        </TodoFilter>
       </MainContainer>
     </MainBody>
   );

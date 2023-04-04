@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Toggle from "./Toggle";
-import { IcBtn } from "../components/Btn";
+import { IcBtn } from "./Btn";
 import { ReactComponent as Trash } from "../images/ic-trash.svg";
 import { ReactComponent as Edit } from "../images/ic-edit.svg";
 
@@ -9,7 +9,7 @@ import { ReactComponent as Edit } from "../images/ic-edit.svg";
 //   fill: ${(props) => props.theme.color.icon};
 // `;
 
-const TaskBody = styled.div`
+const TodoBody = styled.div`
   width: 19.75rem;
   margin: 1rem;
   padding: 1.5rem;
@@ -19,13 +19,13 @@ const TaskBody = styled.div`
   flex-direction: column;
 `;
 
-const TaskIcBtnContainer = styled.div`
+const TodoIcBtnContainer = styled.div`
   display: flex;
   justify-content: right;
   margin-bottom: 2rem;
 `;
 
-const TaskContainer = styled.div`
+const TodoContainer = styled.div`
   padding: 0.5rem;
   display: flex;
   flex-direction: column;
@@ -34,34 +34,34 @@ const TaskContainer = styled.div`
 `;
 
 // input으로 바꾸기
-const TaskInput = styled.p`
+const TodoInput = styled.p`
   width: 100%;
   margin-bottom: 1.5rem;
 `;
 
-function Task() {
+function TodoItem({ id, content, createdAt, complete }) {
+  console.log(createdAt);
+  console.log(id);
   return (
     <>
-      <TaskBody>
-        <TaskIcBtnContainer>
+      <TodoBody>
+        <TodoIcBtnContainer>
           <IcBtn>
             <Trash />
           </IcBtn>
           <IcBtn>
             <Edit />
           </IcBtn>
-        </TaskIcBtnContainer>
-        <TaskContainer>
-          <TaskInput>
-            <p>Task test</p>
-          </TaskInput>
+        </TodoIcBtnContainer>
+        <TodoContainer>
+          <TodoInput>{content}</TodoInput>
           <Toggle />
-        </TaskContainer>
-      </TaskBody>
+        </TodoContainer>
+      </TodoBody>
     </>
   );
   // 수정버튼을 눌렀는지 아ㄴㅣ 해
   // text 영역을 edit input으로 만들기
 }
 
-export default Task;
+export default TodoItem;
