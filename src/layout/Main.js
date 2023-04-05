@@ -44,12 +44,12 @@ const TodoFilter = styled.div`
   /* display: flex; */
   /* height: 100; */
   /* background-color: red; */
-  /* display: grid; */
-  /* grid-template-columns: 1fr 1fr 1fr; */
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   /* padding: 0.5rem; */
 `;
 
-function Main({ todoList, onCreate, onDelete, onEdit }) {
+function Main({ todoList, onCreate, onDelete, onEdit, onComplete }) {
   return (
     <MainBody>
       <MainContainer>
@@ -60,7 +60,14 @@ function Main({ todoList, onCreate, onDelete, onEdit }) {
         </TodoTitle>
         <TodoFilter>
           {todoList.map((e) => (
-            <TodoItem key={e.id} {...e} onDelete={onDelete} onEdit={onEdit} />
+            <TodoItem
+              key={e.id}
+              {...e}
+              onDelete={onDelete}
+              onEdit={onEdit}
+              todoList={todoList}
+              onComplete={onComplete}
+            />
           ))}
         </TodoFilter>
       </MainContainer>

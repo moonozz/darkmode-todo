@@ -15,13 +15,13 @@ export const dummyData = [
     id: 3,
     content: "오늘의 할 일을 작성해서 TODO 리스트를 등록하기",
     createdAt: new Date().toLocaleString(),
-    complete: false,
+    complete: true,
   },
   {
     id: 4,
     content: "오늘의 할 일을 작성해서 TODO 리스트를 등록하기",
     createdAt: new Date().toLocaleString(),
-    complete: false,
+    complete: true,
   },
   {
     id: 5,
@@ -39,7 +39,7 @@ export const dummyData = [
     id: 7,
     content: "오늘의 할 일을 작성해서 TODO 리스트를 등록하기",
     createdAt: new Date().toLocaleString(),
-    complete: false,
+    complete: true,
   },
   {
     id: 8,
@@ -51,7 +51,7 @@ export const dummyData = [
     id: 9,
     content: "오늘의 할 일을 작성해서 TODO 리스트를 등록하기",
     createdAt: new Date().toLocaleString(),
-    complete: false,
+    complete: true,
   },
   {
     id: 10,

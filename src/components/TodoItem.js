@@ -39,9 +39,20 @@ const TodoContainer = styled.div`
 const TodoInput = styled.p`
   width: 100%;
   margin-bottom: 1.5rem;
+  /* flex-grow: 2; */
+  height: 3rem;
 `;
 
-function TodoItem({ id, content, createdAt, complete, onDelete, onEdit }) {
+function TodoItem({
+  todoList,
+  id,
+  content,
+  createdAt,
+  complete,
+  onDelete,
+  onEdit,
+  onComplete,
+}) {
   // console.log(createdAt);
   // console.log(id);
 
@@ -49,14 +60,19 @@ function TodoItem({ id, content, createdAt, complete, onDelete, onEdit }) {
   const [isEdit, setIsEdit] = useState(false);
   const toggleIsEdit = () => setIsEdit(!isEdit);
 
+  // 수정 버튼 누른 후 textarea 확인
   const [editContent, setEditContent] = useState(content);
   const editContentInput = useRef();
 
   const handleEdit = (e) => setEditContent(e.target.value);
+
+  // 수정 취소 버튼 눌렀을 때
   const handleEditExit = () => {
     setIsEdit(false);
     setEditContent(content);
   };
+
+  // 수정 완료 버튼 누르면 반영되게
   const handleEditComplete = () => {
     if (editContent.length > 30 || editContent.length === 0) {
       editContentInput.current.focus();
@@ -66,6 +82,7 @@ function TodoItem({ id, content, createdAt, complete, onDelete, onEdit }) {
     toggleIsEdit();
   };
 
+  // 삭제 버튼 눌렀을 때
   const handleDelete = () => {
     if (window.confirm(`${id}번째 일기를 삭제하시겠습니까?`)) {
       return onDelete(id);
@@ -75,6 +92,7 @@ function TodoItem({ id, content, createdAt, complete, onDelete, onEdit }) {
   return (
     <>
       <TodoBody>
+        {/* 수정 중일때 보여질 버튼 구분 */}
         {isEdit ? (
           <TodoIcBtnContainer>
             <IcBtn>
@@ -90,6 +108,7 @@ function TodoItem({ id, content, createdAt, complete, onDelete, onEdit }) {
               <Trash onClick={handleDelete} />
             </IcBtn>
             <IcBtn>
+              {/* 만약 complete가 true이면 Edit 버튼 disabled */}
               <Edit onClick={toggleIsEdit} />
             </IcBtn>
           </TodoIcBtnContainer>
@@ -97,6 +116,7 @@ function TodoItem({ id, content, createdAt, complete, onDelete, onEdit }) {
 
         <TodoContainer>
           <TodoInput>
+            {/* 수정 중일때 보여질 content 구분 */}
             {isEdit ? (
               <textarea
                 ref={editContentInput}
@@ -104,10 +124,14 @@ function TodoItem({ id, content, createdAt, complete, onDelete, onEdit }) {
                 onChange={handleEdit}
               ></textarea>
             ) : (
-              <>{content}</>
+              <>
+                {/* complete가 true이면 content 에 밑줄 생기게 */}
+                {content}
+              </>
             )}
           </TodoInput>
-          <Toggle />
+          {/* isEdit 이 true 이면 toggle 비활성화 */}
+          <Toggle onComplete={onComplete} id={id} todoList={todoList} />
         </TodoContainer>
       </TodoBody>
     </>

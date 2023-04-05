@@ -87,3 +87,16 @@ export default Nav;
 // const MarginBottom = styled.li`
 //   margin-bottom: ${(props) => props.marginBottom * 20 + "px"};
 // `;
+
+// 여기서 상태를 줄거고
+// 여기에 버튼 누른거에 따라서 상태가 변할거고,
+// 그 상태에 따라서 App.js에서 데이터를 필터링할거야
+
+// 상태가 가질 수 있는 값이 세개여야돼...
+// 세개에 따라서 필터링
+// every 전체
+// remain false
+// comp true
+
+// 상태도, 상태변경하는 함수도 App 에 만들고,
+// 그러고 내려줘 겁내 내려줘..

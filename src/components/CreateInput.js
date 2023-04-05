@@ -42,10 +42,12 @@ function CreateInput({ onCreate }) {
   const [text, setText] = useState("");
   const [complete, setComplete] = useState(false);
 
+  // input에 입력한 값 보여주기
   const onChange = (e) => {
     setText(e.target.value);
   };
 
+  // 등록하기 버튼 클릭했을 때
   const handleSubmit = () => {
     console.log(text);
     if (text.length > 30 || text.length === 0) {

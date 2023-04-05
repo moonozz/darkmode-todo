@@ -33,7 +33,7 @@ const ToggleContainer = styled.div`
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
 
-    // TODO : .toggle--checked 클래스가 활성화 되었을 경우의 CSS를 구현합니다.
+    // .toggle--checked 클래스가 활성화 되었을 경우의 CSS 구현
     &.toggle--checked {
       left: 30px;
       transition: all 0.3s ease;
@@ -42,11 +42,17 @@ const ToggleContainer = styled.div`
   }
 `;
 
-function Toggle() {
+function Toggle({ onComplete, id, todoList }) {
+  // toggle 클릭 됐는지 안 됐는지
   const [isOn, setIsOn] = useState(false);
 
   const toggleHandeler = () => {
     setIsOn(!isOn);
+    onComplete(id);
+    // 비동기라서 이전의 값이 console에 찍힘
+    // console.log(isOn);
+    // console.log(id);
+    // console.log(todoList);
   };
 
   return (
