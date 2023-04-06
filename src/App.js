@@ -82,6 +82,7 @@ function App() {
     );
   };
 
+  // todo 상태 완료와 진행중 설정하는 toggle 만들기
   const onComplete = (targetId) => {
     setData(
       data.map((e) => (e.id === targetId ? { ...e, complete: !e.complete } : e))

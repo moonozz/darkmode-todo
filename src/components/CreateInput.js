@@ -18,6 +18,7 @@ const InputField = styled.input`
   /* width: 80%; */
   flex-grow: 2;
   background-color: ${(props) => props.theme.color.contentBgColor};
+  color: ${(props) => props.theme.color.contenttxtColor};
   ::placeholder {
     color: ${(props) => props.theme.color.txtGrayColor};
   }

@@ -11,9 +11,11 @@ export const light = {
     txtBtnBgHoverColor: "#F6F6F6",
     navColor: "#fff",
     toggleBgColor: "#F8F8F8",
+    toggleDisBgColor: "#F8F8F8",
     contentBgColor: "#fff",
     taskLengthTagBg: "#ECECEC",
     icon: "#494949",
+    iconDisabled: "#DADADA",
   },
   // background-image: {URL()},
 };
@@ -30,8 +32,10 @@ export const dark = {
     txtBtnBgHoverColor: "#282C36",
     navColor: "#181C24",
     toggleBgColor: "#1B1F24",
+    toggleDisBgColor: "#3A404D",
     contentBgColor: "#2A2F39",
     taskLengthTagBg: "#2A2F39",
     icon: "#B0B6C2",
+    iconDisabled: "#474D59",
   },
 };

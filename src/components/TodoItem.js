@@ -36,11 +36,21 @@ const TodoContainer = styled.div`
 `;
 
 // input으로 바꾸기
-const TodoInput = styled.p`
+const TodoInput = styled.div`
   width: 100%;
   margin-bottom: 1.5rem;
   /* flex-grow: 2; */
   height: 3rem;
+  /* color: ${(props) => props.theme.color.contenttxtColor}; */
+`;
+
+const TodoContent = styled.p`
+  text-decoration: ${(props) =>
+    props.txtDecoration ? "line-through" : "none"};
+  color: ${(props) =>
+    props.txtDecoration
+      ? props.theme.color.txtGrayColor
+      : props.theme.color.contenttxtColor};
 `;
 
 function TodoItem({
@@ -84,7 +94,7 @@ function TodoItem({
 
   // 삭제 버튼 눌렀을 때
   const handleDelete = () => {
-    if (window.confirm(`${id}번째 일기를 삭제하시겠습니까?`)) {
+    if (window.confirm("일기를 삭제하시겠습니까?")) {
       return onDelete(id);
     }
   };
@@ -95,22 +105,29 @@ function TodoItem({
         {/* 수정 중일때 보여질 버튼 구분 */}
         {isEdit ? (
           <TodoIcBtnContainer>
-            <IcBtn>
-              <Close onClick={handleEditExit} />
+            <IcBtn onClick={handleEditExit}>
+              <Close />
             </IcBtn>
-            <IcBtn className="complete">
-              <Complete onClick={handleEditComplete} />
+            <IcBtn className="complete" onClick={handleEditComplete}>
+              <Complete />
             </IcBtn>
           </TodoIcBtnContainer>
         ) : (
           <TodoIcBtnContainer>
-            <IcBtn>
-              <Trash onClick={handleDelete} />
+            <IcBtn onClick={handleDelete}>
+              <Trash />
             </IcBtn>
-            <IcBtn>
-              {/* 만약 complete가 true이면 Edit 버튼 disabled */}
-              <Edit onClick={toggleIsEdit} />
-            </IcBtn>
+            {/* 만약 complete가 true이면 Edit 버튼 disabled */}
+            {complete === false ? (
+              <IcBtn onClick={toggleIsEdit}>
+                <Edit />
+              </IcBtn>
+            ) : (
+              <IcBtn btnDisabled={complete}>
+                <Edit />
+              </IcBtn>
+            )}
+            {/* <Edit onClick={toggleIsEdit} btnDisabled={complete} /> */}
           </TodoIcBtnContainer>
         )}
 
@@ -124,14 +141,17 @@ function TodoItem({
                 onChange={handleEdit}
               ></textarea>
             ) : (
-              <>
-                {/* complete가 true이면 content 에 밑줄 생기게 */}
-                {content}
-              </>
+              // complete가 true이면 content 에 밑줄 생기게
+              <TodoContent txtDecoration={complete}>{content}</TodoContent>
             )}
           </TodoInput>
-          {/* isEdit 이 true 이면 toggle 비활성화 */}
-          <Toggle onComplete={onComplete} id={id} todoList={todoList} />
+          <Toggle
+            onComplete={onComplete}
+            id={id}
+            todoList={todoList}
+            complete={complete}
+            isEdit={isEdit}
+          />
         </TodoContainer>
       </TodoBody>
     </>
