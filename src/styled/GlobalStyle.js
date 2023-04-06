@@ -25,7 +25,7 @@ const GlobalStyle = createGlobalStyle`
     /* background-color: #F6F6F6; */
     background-color: ${(props) => props.theme.color.bgColor};
     /* margin-bottom: 100px; */
-    padding: 8px 0px 8px 8px;
+    /* padding: 8px 0px 8px 8px; */
   }
   ol, ul{
     list-style: none;
@@ -46,6 +46,7 @@ const GlobalStyle = createGlobalStyle`
 
   h2 {
     font-size: 2rem;
+    line-height: 2.8rem;
     word-break: keep-all;
     font-weight:700;
     color: ${(props) => props.theme.color.contenttxtColor};

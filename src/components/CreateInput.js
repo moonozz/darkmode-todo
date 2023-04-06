@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 const CreateInputBody = styled.div`
   width: 100%;
+  max-width: 64.5rem;
   background-color: ${(props) => props.theme.color.contentBgColor};
   padding: 0.875rem 0.875rem 0.875rem 2rem;
   margin-bottom: 4rem;
@@ -12,6 +13,8 @@ const CreateInputBody = styled.div`
   color: ${(props) => props.theme.color.contenttxtColor};
   display: flex;
   align-items: center;
+  position: fixed;
+  z-index: 1;
 `;
 
 const InputField = styled.input`
@@ -37,11 +40,11 @@ const SubmitBtn = styled.button`
   }
 `;
 
-function CreateInput({ onCreate }) {
+function CreateInput({ onCreate, setTodoFilter }) {
   const contentInput = useRef();
 
   const [text, setText] = useState("");
-  const [complete, setComplete] = useState(false);
+  // const [complete, setComplete] = useState(false);
 
   // input에 입력한 값 보여주기
   const onChange = (e) => {
@@ -58,9 +61,10 @@ function CreateInput({ onCreate }) {
     // console.log(text);
     // console.log(complete);
     // input 등록하기(App에서 만든 함수 props로 전달받음
-    onCreate(text, complete);
+    onCreate(text);
     // input 등록하고 내용 초기화해주기
     setText("");
+    setTodoFilter("all");
   };
 
   return (

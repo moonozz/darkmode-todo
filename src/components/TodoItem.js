@@ -127,7 +127,6 @@ function TodoItem({
                 <Edit />
               </IcBtn>
             )}
-            {/* <Edit onClick={toggleIsEdit} btnDisabled={complete} /> */}
           </TodoIcBtnContainer>
         )}
 

@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import styled from "styled-components";
 import TodoItem from "../components/TodoItem";
 import CreateInput from "../components/CreateInput";
@@ -24,6 +23,8 @@ const TodoTitle = styled.div`
   /* background-color: ${(props) => props.theme.color.bgColor}; */
   display: flex;
   align-items: center;
+  margin-top: 9rem;
+  position: fixed;
 `;
 
 const FilterTxt = styled.p`
@@ -47,25 +48,48 @@ const TodoFilter = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   /* padding: 0.5rem; */
+  margin-top: 11.5rem;
+  height: 85vh;
+  overflow-y: auto;
 `;
 
-function Main({ todoList, onCreate, onDelete, onEdit, onComplete }) {
+function Main({
+  todoList,
+  onCreate,
+  onDelete,
+  onEdit,
+  onComplete,
+  todoFilter,
+  getFilterList,
+  filterOption,
+  setTodoFilter,
+}) {
+  // const title = (value) => {
+  //   // if (filterOption.name === todoFilter) {
+  //   //   return filterOption.name;
+  //   // }
+  //   console.log(getFilterList());
+  //   return getFilterList().filter((e) => e === value);
+  // };
+
   return (
     <MainBody>
       <MainContainer>
-        <CreateInput onCreate={onCreate} />
+        <CreateInput onCreate={onCreate} setTodoFilter={setTodoFilter} />
         <TodoTitle>
-          <FilterTxt>할 일 전체보기</FilterTxt>
-          <TodoLengthTag>{todoList.length}</TodoLengthTag>
+          {/* {filterOption.filter() => } */}
+          {/* {getFilterList().filter((e) =>)} */}
+          <FilterTxt></FilterTxt>
+          <TodoLengthTag>{getFilterList().length}</TodoLengthTag>
         </TodoTitle>
         <TodoFilter>
-          {todoList.map((e) => (
+          {getFilterList().map((e) => (
             <TodoItem
               key={e.id}
               {...e}
               onDelete={onDelete}
               onEdit={onEdit}
-              todoList={todoList}
+              todoFilter={todoFilter}
               onComplete={onComplete}
             />
           ))}

@@ -1,14 +1,8 @@
-// import "./App.css";
 import styled, { ThemeProvider } from "styled-components";
-// import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 // import { dummyData } from "./Data/DummyData";
-import AllTodo from "./layout/AllTodo";
-import DoneTodo from "./layout/DoneTodo";
-import DoTodo from "./layout/DoTodo";
 import Nav from "./layout/Nav";
 import Main from "./layout/Main";
-// import Toggle from "./components/Toggle";
 import GlobalStyle from "./styled/GlobalStyle";
 import { light, dark } from "./styled/theme";
 
@@ -17,7 +11,14 @@ import { light, dark } from "./styled/theme";
 const Container = styled.div`
   display: flex;
   flex-direction: row;
+  height: 100vh;
 `;
+
+const filterOption = [
+  { value: "all", name: "할 일 전체보기" },
+  { value: "remain", name: "할 수 있어요!" },
+  { value: "completed", name: "할 일 완료 👍" },
+];
 
 function App() {
   // return <div className="App"></div>;
@@ -32,6 +33,7 @@ function App() {
   };
 
   const [data, setData] = useState([]);
+  const [todoFilter, setTodoFilter] = useState("all");
 
   const dataId = useRef(0);
 
@@ -52,12 +54,34 @@ function App() {
     setData(dummyData);
   };
 
+  // 처음 렌더링할 때 dummydata 가져오기
   useEffect(() => {
     getData();
   }, []);
 
+  // todo complete따라서 filter 하기
+  const getFilterList = () => {
+    const filterCallBack = (e) => {
+      if (todoFilter === "completed") {
+        return e.complete === true;
+      } else {
+        return e.complete === false;
+      }
+    };
+
+    const copyTodo = JSON.parse(JSON.stringify(data));
+    const filteredList =
+      todoFilter === "all"
+        ? copyTodo
+        : copyTodo.filter((e) => filterCallBack(e));
+
+    // console.log(filteredList);
+
+    return filteredList;
+  };
+
   // todo 등록하기
-  const onCreate = (content, complete) => {
+  const onCreate = (content) => {
     const createdAt = new Date().toLocaleString();
     const newItem = {
       id: dataId.current,
@@ -95,13 +119,24 @@ function App() {
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <Container>
-          <Nav toggleTheme={toggleTheme} themeMode={themeMode} />
+          <Nav
+            toggleTheme={toggleTheme}
+            themeMode={themeMode}
+            todoFilter={todoFilter}
+            setTodoFilter={setTodoFilter}
+            filterOption={filterOption}
+            getFilterList={getFilterList}
+          />
           <Main
             onCreate={onCreate}
             todoList={data}
             onDelete={onDelete}
             onEdit={onEdit}
             onComplete={onComplete}
+            todoFilter={todoFilter}
+            getFilterList={getFilterList}
+            setTodoFilter={setTodoFilter}
+            filterOption={filterOption}
           />
         </Container>
       </ThemeProvider>
