@@ -12,6 +12,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   height: 100vh;
+  /* overflow-y: none; */
+  overflow: hidden;
 `;
 
 const filterOption = [
@@ -74,8 +76,6 @@ function App() {
       todoFilter === "all"
         ? copyTodo
         : copyTodo.filter((e) => filterCallBack(e));
-
-    // console.log(filteredList);
 
     return filteredList;
   };

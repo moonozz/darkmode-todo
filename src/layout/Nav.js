@@ -14,8 +14,7 @@ const NavBody = styled.div`
   background-color: ${(props) => props.theme.color.navColor};
   position: relative;
   box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.08);
-  z-index: 1;
-  /* overflow-y: hidden; */
+  z-index: 2;
 
   // 스크롤할 때 스크롤 안되는 모션 주기위해 넣음
   position: fixed;
@@ -44,7 +43,6 @@ const FilterBtn = styled.button`
   padding: 1rem 1.25rem;
   border-radius: 0.875rem;
   font-weight: 600;
-  /* background-color: ${(props) => props.theme.color.txtBtnBgColor}; */
   color: ${(props) =>
     props.selectBtn
       ? props.theme.color.txtColor

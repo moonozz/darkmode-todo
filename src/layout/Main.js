@@ -17,10 +17,13 @@ const MainContainer = styled.div`
   width: 70.5rem;
 `;
 
+const TodoContainer = styled.div`
+  overflow-y: scroll;
+  margin-top: 11.5rem;
+  height: 85vh;
+`;
+
 const TodoTitle = styled.div`
-  /* width: 100%; */
-  /* position: fixed; */
-  /* background-color: ${(props) => props.theme.color.bgColor}; */
   display: flex;
   align-items: center;
   margin-top: 9rem;
@@ -47,10 +50,9 @@ const TodoFilter = styled.div`
   /* background-color: red; */
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  /* padding: 0.5rem; */
-  margin-top: 11.5rem;
-  height: 85vh;
   overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: 15%;
 `;
 
 function Main({
@@ -64,36 +66,33 @@ function Main({
   filterOption,
   setTodoFilter,
 }) {
-  // const title = (value) => {
-  //   // if (filterOption.name === todoFilter) {
-  //   //   return filterOption.name;
-  //   // }
-  //   console.log(getFilterList());
-  //   return getFilterList().filter((e) => e === value);
-  // };
+  const title = (value) => {
+    const test = filterOption.findIndex((obj) => obj.value === value);
+    return filterOption[test].name;
+  };
 
   return (
     <MainBody>
       <MainContainer>
         <CreateInput onCreate={onCreate} setTodoFilter={setTodoFilter} />
         <TodoTitle>
-          {/* {filterOption.filter() => } */}
-          {/* {getFilterList().filter((e) =>)} */}
-          <FilterTxt></FilterTxt>
+          <FilterTxt> {title(todoFilter)}</FilterTxt>
           <TodoLengthTag>{getFilterList().length}</TodoLengthTag>
         </TodoTitle>
-        <TodoFilter>
-          {getFilterList().map((e) => (
-            <TodoItem
-              key={e.id}
-              {...e}
-              onDelete={onDelete}
-              onEdit={onEdit}
-              todoFilter={todoFilter}
-              onComplete={onComplete}
-            />
-          ))}
-        </TodoFilter>
+        <TodoContainer>
+          <TodoFilter>
+            {getFilterList().map((e) => (
+              <TodoItem
+                key={e.id}
+                {...e}
+                onDelete={onDelete}
+                onEdit={onEdit}
+                todoFilter={todoFilter}
+                onComplete={onComplete}
+              />
+            ))}
+          </TodoFilter>
+        </TodoContainer>
       </MainContainer>
     </MainBody>
   );
