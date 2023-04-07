@@ -1,0 +1,64 @@
+{
+  "todos": [
+    {
+      "id": 1,
+      "content": "오늘의 할 일을 작성해서 TODO 리스트를 등록하기",
+      "createdAt": "2023.04.06",
+      "complete": false
+    },
+    {
+      "id": 2,
+      "content": "오늘의 할 일 없는디",
+      "createdAt": "2023.04.06",
+      "complete": false
+    },
+    {
+      "id": 3,
+      "content": "하기시러",
+      "createdAt": "2023.04.06",
+      "complete": true
+    },
+    {
+      "id": 4,
+      "content": "json-server.. 니기럴",
+      "createdAt": "2023.04.06",
+      "complete": false
+    },
+    {
+      "id": 5,
+      "content": "다크모드 만들기",
+      "createdAt": "2023.04.06",
+      "complete": true
+    },
+    {
+      "id": 6,
+      "content": "grid 로 반응형 만들어보기",
+      "createdAt": "2023.04.06",
+      "complete": true
+    },
+    {
+      "id": 7,
+      "content": "CRUD 만들기",
+      "createdAt": "2023.04.06",
+      "complete": true
+    },
+    {
+      "id": 8,
+      "content": "치킨 먹을거야 맥주 먹을거야!!!!!",
+      "createdAt": "2023.04.06",
+      "complete": false
+    },
+    {
+      "id": 9,
+      "content": "하기시러 진짜야",
+      "createdAt": "2023.04.06",
+      "complete": false
+    },
+    {
+      "id": 10,
+      "content": "오늘의 할 일을 작성해서 TODO 리스트를 등록하기",
+      "createdAt": "2023.04.06",
+      "complete": false
+    }
+  ]
+}

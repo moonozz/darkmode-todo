@@ -13,7 +13,8 @@ const CreateInputBody = styled.div`
   color: ${(props) => props.theme.color.contenttxtColor};
   display: flex;
   align-items: center;
-  position: fixed;
+  /* position: fixed; */
+  /* position: absolute; */
   z-index: 1;
 `;
 
@@ -64,8 +65,6 @@ function CreateInput({ onCreate, setTodoFilter }) {
       contentInput.current.focus();
       return;
     }
-    // console.log(text);
-    // console.log(complete);
     // input 등록하기(App에서 만든 함수 props로 전달받음
     onCreate(text);
     // input 등록하고 내용 초기화해주기

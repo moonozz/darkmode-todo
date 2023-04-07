@@ -1,5 +1,6 @@
 import styled, { ThemeProvider } from "styled-components";
 import { useEffect, useRef, useState } from "react";
+import axios from "axios";
 // import { dummyData } from "./Data/DummyData";
 import Nav from "./layout/Nav";
 import Main from "./layout/Main";
@@ -52,7 +53,6 @@ function App() {
         id: dataId.current++,
       };
     });
-
     setData(dummyData);
   };
 
@@ -60,6 +60,17 @@ function App() {
   useEffect(() => {
     getData();
   }, []);
+
+  // // json-server
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const res = await axios.get("http://localhost:3001/todos");
+  //     setData(res.data);
+  //     console.log("되고있니?");
+  //     console.log(res.data);
+  //   }
+  //   fetchData();
+  // }, []);
 
   // todo complete따라서 filter 하기
   const getFilterList = () => {
@@ -118,27 +129,29 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <Container>
-          <Nav
-            toggleTheme={toggleTheme}
-            themeMode={themeMode}
-            todoFilter={todoFilter}
-            setTodoFilter={setTodoFilter}
-            filterOption={filterOption}
-            getFilterList={getFilterList}
-          />
-          <Main
-            onCreate={onCreate}
-            todoList={data}
-            onDelete={onDelete}
-            onEdit={onEdit}
-            onComplete={onComplete}
-            todoFilter={todoFilter}
-            getFilterList={getFilterList}
-            setTodoFilter={setTodoFilter}
-            filterOption={filterOption}
-          />
-        </Container>
+        {data && (
+          <Container>
+            <Nav
+              toggleTheme={toggleTheme}
+              themeMode={themeMode}
+              todoFilter={todoFilter}
+              setTodoFilter={setTodoFilter}
+              filterOption={filterOption}
+              getFilterList={getFilterList}
+            />
+            <Main
+              onCreate={onCreate}
+              todoList={data}
+              onDelete={onDelete}
+              onEdit={onEdit}
+              onComplete={onComplete}
+              todoFilter={todoFilter}
+              getFilterList={getFilterList}
+              setTodoFilter={setTodoFilter}
+              filterOption={filterOption}
+            />
+          </Container>
+        )}
       </ThemeProvider>
     </>
   );

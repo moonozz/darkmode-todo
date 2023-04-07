@@ -12,8 +12,9 @@ import { ReactComponent as Close } from "../images/ic-close.svg";
 // `;
 
 const TodoBody = styled.div`
-  width: 19.75rem;
-  margin: 1rem;
+  /* width: 19.75rem; */
+  /* margin: 0.8rem; */
+  height: 252px;
   padding: 1.5rem;
   border-radius: 1.5rem;
   background-color: ${(props) => props.theme.color.contentBgColor};
@@ -90,7 +91,7 @@ function TodoItem({
   const [isEdit, setIsEdit] = useState(false);
   const toggleIsEdit = () => setIsEdit(!isEdit);
 
-  const [txtCount, setTxtCount] = useState(content.length);
+  const [txtCount, setTxtCount] = useState(content?.length);
 
   // 수정 버튼 누른 후 textarea 확인
   const [editContent, setEditContent] = useState(content);
