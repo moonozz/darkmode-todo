@@ -27,6 +27,12 @@ const InputField = styled.input`
   }
 `;
 
+const TxtCount = styled.div`
+  color: ${(props) => props.theme.color.txtGrayColor};
+  margin-left: 1.5rem;
+  font-size: 0.75rem;
+`;
+
 const SubmitBtn = styled.button`
   margin-left: 1.5rem;
   padding: 1rem 2rem;
@@ -44,11 +50,11 @@ function CreateInput({ onCreate, setTodoFilter }) {
   const contentInput = useRef();
 
   const [text, setText] = useState("");
-  // const [complete, setComplete] = useState(false);
-
+  const [txtCount, setTxtCount] = useState(0);
   // input에 입력한 값 보여주기
   const onChange = (e) => {
     setText(e.target.value);
+    setTxtCount(e.target.value.length);
   };
 
   // 등록하기 버튼 클릭했을 때
@@ -65,6 +71,7 @@ function CreateInput({ onCreate, setTodoFilter }) {
     // input 등록하고 내용 초기화해주기
     setText("");
     setTodoFilter("all");
+    setTxtCount(0);
   };
 
   return (
@@ -76,7 +83,12 @@ function CreateInput({ onCreate, setTodoFilter }) {
           placeholder="오늘의 할 일을 입력해주세요."
           onChange={onChange}
           value={text}
+          maxLength={30}
         />
+        <TxtCount>
+          <span>{txtCount}</span>
+          <span> / 30</span>
+        </TxtCount>
         <SubmitBtn onClick={handleSubmit}>등록하기</SubmitBtn>
       </CreateInputBody>
     </>

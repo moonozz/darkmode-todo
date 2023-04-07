@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
   *{
     box-sizing: border-box;
     font-size: 1rem;
+    font-family: "Pretendard"
   }
   html, body, div, span, h1, h2, h3, h4, h5, h6, p, 
   a, dl, dt, dd, ol, ul, li, form, label, table{
