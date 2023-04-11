@@ -64,7 +64,7 @@ const TodoFilter = styled.div`
   padding: 0.5rem;
   overflow-y: auto;
   overflow-x: hidden;
-  padding-bottom: 15%;
+  padding-bottom: 18%;
 `;
 
 function Main({

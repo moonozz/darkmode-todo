@@ -40,37 +40,37 @@ function App() {
 
   const dataId = useRef(0);
 
-  // todo dummydata 가져오기
-  const getData = async () => {
-    const res = await fetch("https://jsonplaceholder.typicode.com/todos").then(
-      (res) => res.json()
-    );
-    const dummyData = res.slice(0, 10).map((e) => {
-      return {
-        complete: e.completed,
-        content: e.title,
-        createdAt: new Date().toLocaleString(),
-        id: dataId.current++,
-      };
-    });
-    setData(dummyData);
-  };
+  // // todo dummydata 가져오기
+  // const getData = async () => {
+  //   const res = await fetch("https://jsonplaceholder.typicode.com/todos").then(
+  //     (res) => res.json()
+  //   );
+  //   const dummyData = res.slice(0, 10).map((e) => {
+  //     return {
+  //       complete: e.completed,
+  //       content: e.title,
+  //       createdAt: new Date().toLocaleString(),
+  //       id: dataId.current++,
+  //     };
+  //   });
+  //   setData(dummyData);
+  // };
 
-  // 처음 렌더링할 때 dummydata 가져오기
-  useEffect(() => {
-    getData();
-  }, []);
-
-  // // json-server
+  // // 처음 렌더링할 때 dummydata 가져오기
   // useEffect(() => {
-  //   async function fetchData() {
-  //     const res = await axios.get("http://localhost:3001/todos");
-  //     setData(res.data);
-  //     console.log("되고있니?");
-  //     console.log(res.data);
-  //   }
-  //   fetchData();
+  //   getData();
   // }, []);
+
+  // json-server
+  useEffect(() => {
+    async function fetchData() {
+      const res = await axios.get("http://localhost:3000/todos");
+      setData(res.data);
+      // console.log("되고있니?");
+      // console.log(res.data);
+    }
+    fetchData();
+  }, []);
 
   // todo complete따라서 filter 하기
   const getFilterList = () => {
@@ -100,21 +100,52 @@ function App() {
       complete: false,
       createdAt,
     };
+    fetch("http://localhost:3000/todos", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newItem),
+    }).then((res) => {
+      setData([newItem, ...data]);
+    });
     dataId.current += 1;
-    setData([newItem, ...data]);
   };
 
   // todo 삭제하기
   const onDelete = (targetId) => {
+    fetch(`http://localhost:3000/todos/${targetId}`, {
+      method: "DELETE",
+    })
+      .then((res) => {
+        if (res.ok) {
+          alert("삭제되었습니다.");
+        }
+      })
+      .catch((err) => alert(err));
     const newTodoList = data.filter((e) => e.id !== targetId);
     setData(newTodoList);
   };
 
   // todo 수정하기
-  const onEdit = (targetId, newTodo) => {
-    setData(
-      data.map((e) => (e.id === targetId ? { ...e, content: newTodo } : e))
-    );
+  const onEdit = (targetId, newContent) => {
+    let todoLi = data[targetId];
+    fetch(`http://localhost:3000/todos/${targetId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(todoLi),
+    })
+      .then((res) => {
+        console.log(data);
+        setData(
+          data.map((e) =>
+            e.id === targetId ? { ...e, content: newContent } : e
+          )
+        );
+      })
+      .catch((err) => alert(err));
   };
 
   // todo 상태 완료와 진행중 설정하는 toggle 만들기
