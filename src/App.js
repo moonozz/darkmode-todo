@@ -40,32 +40,12 @@ function App() {
 
   const dataId = useRef(0);
 
-  // // todo dummydata 가져오기
-  // const getData = async () => {
-  //   const res = await fetch("https://jsonplaceholder.typicode.com/todos").then(
-  //     (res) => res.json()
-  //   );
-  //   const dummyData = res.slice(0, 10).map((e) => {
-  //     return {
-  //       complete: e.completed,
-  //       content: e.title,
-  //       createdAt: new Date().toLocaleString(),
-  //       id: dataId.current++,
-  //     };
-  //   });
-  //   setData(dummyData);
-  // };
-
-  // // 처음 렌더링할 때 dummydata 가져오기
-  // useEffect(() => {
-  //   getData();
-  // }, []);
-
   // json-server
   useEffect(() => {
     async function fetchData() {
       const res = await axios.get("http://localhost:3000/todos");
-      setData(res.data);
+      // setData(res.data);
+      setData(res.data.sort((a, b) => b.id - a.id));
       // console.log("되고있니?");
       // console.log(res.data);
     }
@@ -123,19 +103,22 @@ function App() {
         }
       })
       .catch((err) => alert(err));
+
     const newTodoList = data.filter((e) => e.id !== targetId);
     setData(newTodoList);
   };
 
   // todo 수정하기
   const onEdit = (targetId, newContent) => {
-    let todoLi = data[targetId];
+    // let todoLi = data[targetId];
+    let todoLi = data.filter((e) => e.id === targetId)[0];
+
     fetch(`http://localhost:3000/todos/${targetId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(todoLi),
+      body: JSON.stringify({ ...todoLi, content: newContent }),
     })
       .then((res) => {
         console.log(data);
@@ -150,9 +133,32 @@ function App() {
 
   // todo 상태 완료와 진행중 설정하는 toggle 만들기
   const onComplete = (targetId) => {
-    setData(
-      data.map((e) => (e.id === targetId ? { ...e, complete: !e.complete } : e))
-    );
+    // let todoLi = data[targetId];
+
+    // filter 써서 findIndex를 써서 el의 id랑 같은애를 찾는게 더 좋을 듯
+    let todoLi = data.filter((e) => e.id === targetId)[0];
+    fetch(`http://localhost:3000/todos/${targetId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ...todoLi,
+        complete: !todoLi.complete,
+      }),
+    })
+      .then((res) => {
+        setData(
+          data.map((e) =>
+            e.id === targetId ? { ...e, complete: !e.complete } : e
+          )
+        );
+      })
+      .catch((err) => alert(err));
+
+    // setData(
+    //   data.map((e) => (e.id === targetId ? { ...e, complete: !e.complete } : e))
+    // );
     // console.log(data);
   };
 

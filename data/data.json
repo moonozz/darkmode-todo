@@ -4,7 +4,7 @@
       "id": 1,
       "content": "오늘의 할 일 없는디",
       "createdAt": "2023.04.06",
-      "complete": false
+      "complete": true
     },
     {
       "id": 2,
@@ -62,9 +62,9 @@
     },
     {
       "id": 11,
-      "content": "aaa",
+      "content": "aaa1122",
       "complete": false,
-      "createdAt": "2023. 4. 12. 오전 12:43:18"
+      "createdAt": "2023. 4. 12. 오전 8:40:11"
     }
   ]
 }
