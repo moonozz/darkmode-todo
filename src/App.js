@@ -43,7 +43,7 @@ function App() {
   // json-server
   useEffect(() => {
     async function fetchData() {
-      const res = await axios.get("http://localhost:3000/todos");
+      const res = await axios.get("https://moonozz-darkmode-todo.netlify.app/");
       // setData(res.data);
       setData(res.data.sort((a, b) => b.id - a.id));
       // console.log("되고있니?");
@@ -80,7 +80,7 @@ function App() {
       complete: false,
       createdAt,
     };
-    fetch("http://localhost:3000/todos", {
+    fetch("https://moonozz-darkmode-todo.netlify.app/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -94,7 +94,7 @@ function App() {
 
   // todo 삭제하기
   const onDelete = (targetId) => {
-    fetch(`http://localhost:3000/todos/${targetId}`, {
+    fetch(`https://moonozz-darkmode-todo.netlify.app/${targetId}`, {
       method: "DELETE",
     })
       .then((res) => {
@@ -113,7 +113,7 @@ function App() {
     // let todoLi = data[targetId];
     let todoLi = data.filter((e) => e.id === targetId)[0];
 
-    fetch(`http://localhost:3000/todos/${targetId}`, {
+    fetch(`https://moonozz-darkmode-todo.netlify.app/${targetId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -137,7 +137,7 @@ function App() {
 
     // filter 써서 findIndex를 써서 el의 id랑 같은애를 찾는게 더 좋을 듯
     let todoLi = data.filter((e) => e.id === targetId)[0];
-    fetch(`http://localhost:3000/todos/${targetId}`, {
+    fetch(`https://moonozz-darkmode-todo.netlify.app/${targetId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
